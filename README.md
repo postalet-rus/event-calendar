@@ -1,1 +1,2 @@
-# event-calendar
+# Календарь событий 
+# Version - 3.0
