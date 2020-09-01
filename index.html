@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <title>Календарь</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="menu-container">
+            <div class="menu">
+                <a class="menu-item" onclick="slideSection(this)" id="mainMenu" name="calendar-body">Главная</a>
+                <a class="menu-item" onclick="slideSection(this)" id="eventsMenu" name="event-body">События</a>
+                <a class="menu-item" onclick="slideSection(this)" id="reportsMenu" name="report-body">Отчёты</a>
+            </div>
+        </div>
+    </header>
+    <section class="calendar-body active">
+        <div class="calendar-wrapper" id="cal_main">
+        </div>
+    </section>
+    <section class="event-body hidden">
+        <div class="event-wrapper">
+            <div class="event-holder">
+                <div class="event-title">
+                    <div class="event-name">Mocha</div>
+                    <div class="event-date">22-22-2222</div>
+                </div>
+                <hr>
+                <div class="event-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, nisi ipsum. Aspernatur natus eos reprehenderit dolorum nulla sit aliquid! Voluptas accusantium iste voluptates sit corporis quia commodi exercitationem impedit quod!</div>
+            </div>
+            <div class="event-holder">
+                <div class="event-title">
+                    <div class="event-name">Параша</div>
+                    <div class="event-date">01.09.2020</div>
+                </div>
+                <hr>
+                <div class="event-text">Виктория Абдуллаева: наконец-то🤣, Вы знаете. что вы будете сидеть 3 пары в одном каб с одним преподавателем?</div>
+            </div>
+            <div class="event-holder">
+                <div class="event-title">
+                    <div class="event-name">Будь здоров!</div>
+                    <div class="event-date">05-12-2020</div>
+                </div>
+                <hr>
+                <div class="event-text">Здоровье – одно из главных слагаемых красоты. Желание быть красивым, совершенным, такое естественное для человека, – верный стимул для приобщения детей к регулярным занятиям физической культурой, правильному питанию, соблюдению здорового образа жизни, отказ от разрушителей здоровья: прежде всего, от курения. Ибо хорошо известно, что красота и здоровье обратно пропорциональны распространённости курения. Проблема табакокурения в настоящее время приобрела социально- экономический характер.</div>
+            </div>
+            <div class="event-holder">
+                <div class="event-title">
+                    <div class="event-name">Mocha</div>
+                    <div class="event-date">22-22-2222</div>
+                </div>
+                <hr>
+                <div class="event-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, nisi ipsum. Aspernatur
+                    natus eos reprehenderit dolorum nulla sit aliquid! Voluptas accusantium iste voluptates sit corporis quia
+                    commodi exercitationem impedit quod!</div>
+            </div>
+        </div>
+    </section>
+    <section class="report-body hidden">
+        <div class="report-wrapper">
+            <p>Здесь будут Отчёты</p>
+            <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti sunt accusantium, accusamus, sed rem facilis aliquid repellat blanditiis rerum beatae dolore fuga veritatis perspiciatis natus tempora doloribus eaque officiis necessitatibus.</span>
+        </div>
+    </section>
+    <script src="js/main.js"></script>
+</body>
+</html>
