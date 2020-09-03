@@ -1,32 +1,41 @@
 "use strict"
 
-
-// utilities 
+// utility functions and shortcuts
 const $ = (x) => { return document.querySelector(x) } //get element by X selector
 const $all = (x) => { return document.querySelectorAll(x) } //get all elements by X selector
-const $new = (x) => { return document.createElement(x) } //create X element
-const month = new Date().getMonth()
-
-const $UTC = (yyyy, mm, dd) => { //parse date to UTC format YYYY-MM-DD
+const $new = (elementName, elementClass) => {
+  let newElement = document.createElement(elementName);
+  if (elementClass) {
+    newElement.className = `${elementClass}`
+  }
+  return newElement
+} //create X element
+const DAYENTRY = (date, element, weekday) => {return {"date": date, "element": element, "weekday": weekday}}; //create day object
+const WEEKDAY = (day) => { //get weekday by day shortcut
+  let weekday = new Date(YEAR, month, day).getDay();
+  weekday === 0 ? weekday = 7 : weekday;
+  return weekday
+}
+const UTC = (yyyy, mm, dd) => { //parse date to UTC format YYYY-MM-DD
   mm < 10 ? mm = `0${mm+1}` : mm+1;
   dd < 10 ? dd = `0${dd}` : dd;
   return `${yyyy}-${mm}-${dd}`
 }
-
-const TODAY = (mm) => {
+const TODAY = (mm) => { //get today in UTC
   let day = new Date().getDate();
-  mm < 10 ? mm = `0${mm + 1}` : mm + 1;
-  day < 10 ? day = `0${day}` : day;
-  return `${YEAR}-${mm}-${day}`
+  return UTC(YEAR, mm, day);
 }
 
-
-let calendarPlace = $("#cal_main");
-const YEAR = new Date().getFullYear();
-const WEEKDAYS = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+// elements and constant values
 const WEEKDAYS_SHORTCUTS = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+const CALENDAR = $("#cal_main");
+const month = new Date().getMonth();
+const YEAR = new Date().getFullYear();
+let calendarPlace = $("#cal_main");
+let days = new Array;
+let currentTD;
 
-
+//functions
 function createCalendarHeader() {
   let tableBody = $new("table");
   let tableHeaderRow = tableBody.insertAdjacentElement("afterBegin", $new("tr"));
@@ -38,105 +47,92 @@ function createCalendarHeader() {
   return tableBody
 }
 
-
-function createCalendarBody(month) {
-  let firstCalendarDay; //false
-  let day = 2;
+function fillCalendar(month) { //creates calendar body and inserts in table
+  let firstday;
   let table = createCalendarHeader();
+  let row = table.insertAdjacentElement("beforeEnd", $new("TR"));
   let firstWeekDay = new Date(YEAR, month, 1).getDay();
+  firstWeekDay === 0 ? firstWeekDay = 7 : firstWeekDay;
   let lastDay = new Date(YEAR, month + 1, 0).getDate();
-  firstWeekDay == 0 ? firstWeekDay = 7 : firstWeekDay = firstWeekDay; //sets sunday value to 7 instead of 0 
-  while(1) {
-    let tableRow = table.insertAdjacentElement("beforeEnd", $new("tr"));
-    for(let i = 1; i<=7; i++) {
-      if (!firstCalendarDay) {
-        let cellContent = getFirstCalendarDay(firstWeekDay, i);
-        if(cellContent.innerHTML != "") {
-          firstCalendarDay = tableRow.insertAdjacentElement("beforeEnd", getFirstCalendarDay(firstWeekDay, i));
-          firstCalendarDay.dataset.data = $UTC(YEAR, month, 1);
-        } else {
-          let tableCell = tableRow.insertAdjacentElement("beforeEnd", cellContent);
-        } continue
-      }
-      let tableCell = tableRow.insertAdjacentElement("beforeEnd", $new("td"));
-      tableCell.innerHTML = `${day}`;
-      tableCell.dataset.data = $UTC(YEAR, month, day);
-      day++;
-      if(day > lastDay) {
-        bindEventListenerToElements(table);
-        return table
-      }
-    }
+  for (let day = 1; day <= lastDay; day++) {
+    let cell = $new("TD");
+    if(!firstday) firstday = cell.style = `grid-column-start: ${firstWeekDay}`;
+    cell.innerHTML = `${day}`;
+    row.insertAdjacentElement("beforeEnd", cell);
+    days.push(DAYENTRY(UTC(YEAR, month, day), cell, WEEKDAYS_SHORTCUTS[WEEKDAY(day)-1]))
   }
+  return table
 }
 
 function highlightToday(month) {
-  let todayTD = $("[data-data='"+TODAY(month)+"']");
-  if(todayTD) todayTD.classList.add("today")
-}
-
-
-function getFirstCalendarDay(firstWeekDay, i) {
-  let calendarDay;
-  if(firstWeekDay === i) {
-    calendarDay = $new("td");
-    calendarDay.innerHTML = `${1}`;
-  } else {
-    calendarDay = $new("td");
-  } return calendarDay
-}
-
-
-function highlight(event) {
-  if (event.target.tagName !== "TD" || event.target.innerHTML == "") return;
-  let curTD = event.target;
-  curTD.style = "background: #e06e45; color: #F0F0F0";
-  highlightTH(curTD);
-}
-
-function clearHighlight(event) {
-  if (event.target.tagName !== "TD") return;
-  let highlightedTD = event.target;
-  highlightedTD.removeAttribute("style");
-  clearHighlightTH(highlightedTD.cellIndex)
+  let today = days.filter(item => item.date == TODAY(month))[0];
+  today.element.classList.add("today");
 }
 
 function highlightTH(cell) {
-  let cellIndex = cell.cellIndex;
-  let thIndex = $('table').rows[0].cells[cellIndex];
-  thIndex.style = "background: linear-gradient(180deg, rgba(245,51,51,1) 0%, rgba(245,70,51,1) 30%, rgba(224,110,69,1) 85%); color: #EFDDDB";
+  if(cell.tagName === "TD") {
+    let weekdayName = days.filter(item => item.element == cell)[0].weekday;
+    let tableHeadElement = Array.from($all("th")).filter(item => item.innerHTML == weekdayName)[0];
+    tableHeadElement.classList.add("active");
+  }
 }
 
-function clearHighlightTH(cell) {
-  let highlightedTH = $('table').rows[0].cells[cell];
-  highlightedTH.removeAttribute("style")
+function clearHighlightTH() {
+  let highlightedTH = $("th.active");
+  if(!highlightedTH) return
+  highlightedTH.classList.remove("active")
+}
+ 
+function showDayEventsMenu() { //shows menu
+  let menu = $(".event-menu");
+  if(!menu) {
+    menu = $("#cal_main").insertAdjacentElement("afterBegin", constructMenuBlock());
+  } else {
+    clear();
+    menu = $("#cal_main").insertAdjacentElement("afterBegin", constructMenuBlock());
+  } return menu
 }
 
+function bindEventListenerToElements(table) { // adding events
 
-function bindEventListenerToElements(table) {
-  // mouseover - highlight TD;
+  // clearAll
+  document.addEventListener("click", (event) => {
+    if(event.target.tagName != "TD") {
+      currentTD = null;
+      clear()
+    } 
+  });
+
+  // mouseover
   table.addEventListener("mouseover", (event) => {
-    highlight(event)
+    if (event.target.tagName !== "TD") return
+    highlightTH(event.target);
   });
 
-  // mouseout - clearHighlight;
+  // mouseout
   table.addEventListener("mouseout", (event) => {
-    clearHighlight(event)
+    clearHighlightTH()
   });
 
-  // 
+  // click
   table.addEventListener("click", (event) => {
+    if (event.target.tagName !== "TD" || currentTD == event.target) {
+      return
+    }
+    currentTD = event.target;
+    let eventMenu = showDayEventsMenu();
+    setTimeout(() => eventMenu.classList.add("menu-expanded"), 1);
   });
 }
 
-
-function slideSection(element) {
+function slideSection(element) { // shows clicked section and hides another ones
   let currentSection = $(`.${element.name}`);
   let menuItems = Array.from($all("section"));
   if (currentSection.classList.contains("active")) {
     return
   } else {
-    menuItems.splice(menuItems.indexOf(currentSection), menuItems.indexOf(currentSection)); //delete current element from array
+    hardClean()
+    menuItems.splice(menuItems.indexOf(currentSection), menuItems.indexOf(currentSection)); // delete current element from array
     menuItems.forEach((item) => {
       item.classList.remove("active");
       item.classList.add("hidden");
@@ -147,5 +143,47 @@ function slideSection(element) {
 } 
 
 
-calendarPlace.insertAdjacentElement("afterbegin", createCalendarBody(month));
+window.addEventListener("keydown", (event) => { // shortcut
+  if(event.code == "KeyR") {
+    document.location.reload()
+  }
+})
+
+function constructMenuBlock() { // create menu div block
+  let menu = $new("div", "event-menu");
+  let menuWrapper = $new("div", "event-menu-wrapper");
+  let hr = $new("hr");
+  let menuTitle = $new("h3", "menu-title");
+  menuTitle.innerHTML = "События";
+  let eventsContainer = $new("div", "events-container");
+  eventsContainer.id = "events_container";
+
+  menu.insertAdjacentElement("beforeEnd", menuWrapper);
+  menuWrapper.insertAdjacentElement("beforeEnd", menuTitle);
+  menuWrapper.insertAdjacentElement("beforeEnd", hr);
+  menuWrapper.insertAdjacentElement("beforeEnd", eventsContainer);
+
+  menu.addEventListener("click", () => {
+    clear();
+    currentTD = null;
+  });
+  return menu
+}
+
+function hardClean() { // cleans events menu without animation
+  let menu = $(".event-menu");
+  if (menu) menu.remove()
+}
+
+function clear() { // cleans events menu
+  let menu = $(".event-menu");
+  if (menu) {
+    menu.classList.remove("menu-expanded");
+    menu.addEventListener("transitionend", () => menu.remove());
+  }
+}
+
+//initialization//
+let generatedCalendar = calendarPlace.insertAdjacentElement("afterbegin", fillCalendar(month));
+bindEventListenerToElements(generatedCalendar);
 highlightToday(month);
