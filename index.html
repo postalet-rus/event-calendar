@@ -18,6 +18,22 @@
         </div>
     </header>
     <section class="calendar-body active">
+        <div class="settings-block-wrapper" id="settings">
+            <div class="settings-block settings-date" id="s_date" title="Дата"></div>
+            <div class="settings-block settings-date-range" id="s_range" title="Промежуток"></div>
+            <div class="settings-middle-block settings-expand-menu hidden" id="s_expand_m">
+                <div class="expanded-block hidden" id="es_date">
+                    date
+                </div>
+                <div class="expanded-block hidden" id="es_range">s_range</div>
+                <div class="expanded-block hidden" id="es_utility">
+                    <input type="checkbox" onchange="changeTheme(this)">Тёмная тема</input>
+                </div>
+                <div class="expanded-block hidden" id="es_notes">s_notes</div>
+            </div>
+            <div class="settings-block settings-utility" id="s_utility" title="Настройки"></div>
+            <div class="settings-block settings-notes" id="s_notes" title="Заметки"></div>
+        </div>
         <div class="calendar-wrapper" id="cal_main"></div>
     </section>
     <section class="event-body hidden">

@@ -9,41 +9,63 @@
 
   div.event-menu {
     transition: height .2s ease-in-out;
-}
+  }
+
+  .event-menu.menu-expanded.minimized {
+    width: 100%;
+    height: 10%; 
+  }
 
   .event-menu.menu-expanded {   
-      background: #ffffff;  
-      height: 100%;
-      width: 100%;
+    background: #ffffff;  
+    height: 100%;
+    width: 100%;
   }
 
   .event-menu {
-      top: 120%;
-      height: 0;
-      width: 100%;
-      z-index: 1;
-      background: #ffffff; 
-      border-radius: 20px;
-      border: 2px outset #386fc2;
+    top: 100%;
+    height: 0;
+    width: 100%;
+    z-index: 1;
+    background: #ffffff; 
+    border-radius: 20px;
+    border: 2px outset #386fc2;
   }
 
-  .event-menu-wrapper {
-      margin-top: 20px;
+  .event-menu h3 {
+    padding-top: 10%;
   }
 
   .event-menu hr {
-      width: 80%;
-      margin: 10px auto;
+    width: 80%;
+    margin: 10px auto;
   }
 
   .events-container {
-      margin: 0 auto;
-      width: 80%;
-      height: 100%;
-      overflow-y: scroll
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    overflow-y: scroll
   }
 
   .events-container::-webkit-scrollbar {
-      display: none;
+    display: none;
+  }
+
+  .toggle-container {
+    width: 100%;
+    height: 10%;
+    background-image: url("../img/UpArrow.svg");
+    background-repeat: no-repeat;
+    background-size: 3vmin;
+  }
+
+  .toggle-container-minimized {
+    height: 100%;
+    background: #ffffff;
+    background-image: url("../img/DownArrow.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 3vmin;
   }
 }
