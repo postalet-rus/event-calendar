@@ -35,6 +35,74 @@ header {
     user-select: none;
 }
 
+/* sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    justify-content: space-between;
+}
+
+.sidebar-button, .sidebar-settings {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.sidebar-button {
+    width: 50px;
+    height: 50px;
+    background: #386fc2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    opacity: .2;
+    transition: opacity .2s ease;
+}
+
+.image-wrapper {
+    padding: 2px;
+    width: 45px;
+    height: 45px;
+    background: #ffffff;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .5s ease;
+}
+
+.image-wrapper>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+
+.sidebar-button:hover {
+    opacity: 1;
+}
+
+.sidebar-settings {
+    width: 50px;
+    transition: width .5s ease;
+    height: 80vh;
+    background: #386fc2;
+}
+
+.image-wrapper.maximized {
+    transform: rotate(90deg);
+}
+
+.minimized {
+    width: 0;
+}
+
+.button-maximized {
+    opacity: 1;
+}
 /* calendar */
 #cal_main {
     position: relative
@@ -177,7 +245,7 @@ div.event-menu {
     margin: 0 auto;
     width: 80%;
     height: 100%;
-    overflow-y: scroll
+    overflow-y: hidden;
 }
 
 .events-container::-webkit-scrollbar {
