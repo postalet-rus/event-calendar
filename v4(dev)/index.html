@@ -1,41 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Календарь</title>
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь</title>
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="js/calendar_mod.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
   <header class="header">
+    <div class="logo-container">
+      <img src="favicon.svg" alt="logo.svg" class="logo">
+    </div>
     <div class="nav-menu">
       <div class="menu-button" id="navMenu">
         <span id="menu1"></span>
         <span id="menu2"></span>
         <span id="menu3"></span>
       </div>
-      <div id="navItems" class="nav-menu-items" hidden>
-        <div class="nav-menu-item">Календарь</div>
-        <div class="nav-menu-item">События</div>
-        <div class="nav-menu-item">Настройки</div>
+      <div id="navItems" class="nav-menu-full">
+        <div class="nav-menu-item-full" id="calendar">Календарь<div class="underline-hover"></div></div>
+        <div class="nav-menu-item-full" id="events">События<div class="underline-hover"></div></div>
+        <div class="nav-menu-item-full" id="settings">Персонализация<div class="underline-hover"></div></div>
       </div>
     </div>
   </header>
-  <main class="main">
+  <main class="main" id="_main">
+    <div class="page-status">
       <div class="loading-container">
         <div class="loading-icon"></div>
-        <h4>loading</h4>
+        <h4 id="loadingMsg">loading</h4>
       </div>
       <div class="container" hidden>
-        <div class="ui-menu-wrapper">
+        <div class="ui-wrapper">
           <h1>Calendar v4.0 (dev)</h1>
-          <div class="main-menu">
+        </div>
+      </div>
+    </div>
+    <section class="calendar" hidden>
+      <div class="calendar-wrapper">
+        <span id="yearTitle" class="calendar-title">2020</span>
+        <div class="month-display-wrapper">
+          <div id="leftBtn" class="left-calendar-nav-button"></div>
+          <div id="monthTitle"><span class="month-title"></span></div>
+          <div id="rightBtn" class="right-calendar-nav-button"></div>
+        </div>
+        <table class="calendarMain">
+          <tr>
+            <th>ПН</th>
+            <th>ВТ</th>
+            <th>СР</th>
+            <th>ЧТ</th>
+            <th>ПТ</th>
+            <th>СБ</th>
+            <th>ВС</th>
+          </tr>
+          <tr id="calMain"></tr>
+        </table>
+      </div>
+      <!-- calendar block -->
+      <div class="event-block-wrapper">
+        <div class="event-block">
+          <div class="event-block-title"><span>Список событий</span></div>
+          <div class="event-block-view">
+            <div class="shortcut select-year"><span>ГОД</span></div>
+            <div class="shortcut select-month"><span>МЕСЯЦ</span></div>
+            <div class="shortcut select-year"><span>ДЕНЬ</span></div>
           </div>
         </div>
       </div>
+    </section>
+    <section class="events" id="evMain" hidden>
+      poggersEvent
+    </section>
+    <section class="settings" id="setMain" hidden>
+      lmaoSett
+    </section>
   </main>
   <footer class="footer"></footer>
-<script src="js/main.js"></script>
 </body>
 </html>

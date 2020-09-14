@@ -2,8 +2,7 @@
   from {
     transform: rotate(0deg);
     border-radius: 100%;
-  }
-  to {
+  } to {
     transform: rotate(360deg)
   }
 }
@@ -11,28 +10,56 @@
 @keyframes appear {
   from {
     opacity: 0;
-  }
-  to {
+  } to {
     opacity: 1;
   }
 }
 
 @keyframes expand-nav-menu {
   from {
-    height: 0;
-    padding: 0;
-  } 
-  to {
+    transform: translate(-240px, 0);
+    padding-top: 0;
+    padding-bottom: 0;
+  } to {
   }
 }
 
-@keyframes hide-item {
+@keyframes slide {
   from {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  } to {
+    opacity: 1;
+    transform: translate(0, 0)
   }
+}
 
-  to {
-    width: 0;
-    height: 0;
-    display: none;
+@keyframes slideUpDown {
+  from {
+    transform: translate(-50%, 0);
+    color: red
+  } to {
+    transform: translate(0, 0)
   }
+}
+
+/* nav-menu-button expand animation */
+#menu1, #menu2, #menu3 {
+  transition: transform .2s ease
+}
+
+.menu-button.menu-button-expanded #menu1 {
+  position: absolute;
+  transform: rotate(45deg);
+  box-shadow: none
+}
+
+.menu-button.menu-button-expanded #menu2 {
+  position: absolute;
+  transform: rotate(135deg);
+  box-shadow: none
+}
+
+.menu-button.menu-button-expanded #menu3 {
+  display: none
 }
