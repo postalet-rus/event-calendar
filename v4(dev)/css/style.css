@@ -227,7 +227,8 @@ body {
 .calendar th, td {
   box-shadow: 2px 2px 1px #313030;
   border-radius: 5px;
-  height: 10.56vmin;
+  height: 5vmax;
+  width: 5vmax;
   margin: 2px;
   background: #ffffff;
   overflow: hidden;
@@ -236,6 +237,7 @@ body {
 
 section {
   animation: slide .5s normal ease;
+  transition: left .5s ease, right .5s ease;
 }
 
 .calendar td:active {
@@ -256,7 +258,8 @@ section {
   text-align: right
 }
 
-.month-display-wrapper {
+.month-display-wrapper, .year-display-wrapper {
+  position: relative;
   background: #ffffff;
   width: 80%;
   border-radius: 5px;
@@ -268,27 +271,52 @@ section {
   padding: 5px;
 }
 
+.year-display-wrapper:first-child {
+  font-size: 2.5vmin;
+  background: none;
+}
+
 .left-calendar-nav-button, .right-calendar-nav-button {
   height: 25px;
   width: 25px;
+}
+
+.left-calendar-year-nav-button, .right-calendar-year-nav-button {
+  height: 15px;
+  width: 15px
 }
 
 .left-calendar-nav-button {
   background: url("../img/left-arrow.svg") no-repeat center center / cover;
 }
 
+.left-calendar-year-nav-button {
+  background: url("../img/left-arrow-white.svg") no-repeat center center / cover;
+}
 
-.right-calendar-nav-button {
+.right-calendar-nav-button, .right-calendar-year-nav-button {
   background: url("../img/right-arrow.svg") no-repeat center center / cover;
+}
+
+.right-calendar-year-nav-button {
+  background: url("../img/right-arrow-white.svg") no-repeat center center / cover;
 }
 
 .month-title {
   animation: slideUpDown 1s normal ease;
 }
 
+.month-title:hover {
+  color: rgb(85, 180, 180);
+  text-shadow: 0 0 1px rgb(23, 197, 197);
+}
+
+#monthTitle {
+  position: relative;
+}
+
 /* event block */
 .event-block-wrapper {
-  margin-top: 19px;
   width: 50%;
   height: 100%;
   display: flex;
@@ -353,6 +381,39 @@ section {
   font-size: .9rem
 }
 
+.month-menu {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 2vmin;
+  top: 0;
+  bottom: 0;
+  right: 50%;
+  left: 30%;
+  animation: slideUpDown .1s normal ease
+}
+
+.month-item {
+  width: 10vmin;
+  height: 10vmin;
+  background: #bfe3fd;
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 rgb(161, 130, 130);
+  border: 1px solid #cfcffa;
+  margin: 1px;
+  animation: slide .2s normal ease
+}
+
+.month-item:hover {
+  background: #67B2E8;
+  box-shadow: 1px 1px 1px #3f6c8d;
+  border-radius: 5px;
+}
+
+.month-item.current-month {
+  background: red;
+}
+
 @media (max-width: 675px) {
       .header {
         justify-content: space-between;
@@ -391,12 +452,17 @@ section {
         display: none;
       }
     
-      td, th {
-        font-size: 10px;
+      .calendar th, td {
         text-align: center;
+        height: 10vmin;
+        width: 10vmin;
       }
     
       .calendar-wrapper {
         width: 100%;
+      }
+
+      .event-block-wrapper {
+        display: none;
       }
     }

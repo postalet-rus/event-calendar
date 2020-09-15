@@ -43,8 +43,12 @@
     </div>
     <section class="calendar" hidden>
       <div class="calendar-wrapper">
-        <span id="yearTitle" class="calendar-title">2020</span>
-        <div class="month-display-wrapper">
+        <div class="year-display-wrapper">
+          <div class="left-calendar-year-nav-button" id="leftBtnYear"></div>
+          <span id="yearTitle" class="calendar-title">2020</span>
+          <div class="right-calendar-year-nav-button" id="rightBtnYear"></div>
+        </div>
+        <div class="month-display-wrapper" id="monthWrp">
           <div id="leftBtn" class="left-calendar-nav-button"></div>
           <div id="monthTitle"><span class="month-title"></span></div>
           <div id="rightBtn" class="right-calendar-nav-button"></div>
@@ -66,11 +70,6 @@
       <div class="event-block-wrapper">
         <div class="event-block">
           <div class="event-block-title"><span>Список событий</span></div>
-          <div class="event-block-view">
-            <div class="shortcut select-year"><span>ГОД</span></div>
-            <div class="shortcut select-month"><span>МЕСЯЦ</span></div>
-            <div class="shortcut select-year"><span>ДЕНЬ</span></div>
-          </div>
         </div>
       </div>
     </section>

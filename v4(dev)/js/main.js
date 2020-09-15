@@ -2,17 +2,6 @@
 
 const $ = (x) => { return document.querySelector(x); }; // get element by query selector
 const $all = (x) => { return document.querySelectorAll(x); }; // get all elements by query selector
-const $toggle = (element) => { // hides element or raise TypeError
-  if(typeof(element) != "object") {
-    console.error(`TypeError: element expected but got ${typeof(element)} instead`);
-  } else {
-    if(element.hidden === true) {
-      element.hidden = false;
-    } else {
-      element.hidden = true;
-    }
-  }
-};
 let menuSections = '';
 const table = $("#calMain");
  
@@ -43,6 +32,13 @@ function addClearClick() { // hides menu whenever user clicks out of menu on mob
   let body = $("body");
   if(navItems && body) {
     body.addEventListener("click", event => {
+      if ($(".month-menu")) {
+        if (!$("#monthWrp").contains(event.target)) {
+          let menu = $(".month-menu");
+          menu.innerHTML = '';
+          menu.remove();
+        }
+      }
       if(!$(".nav-menu").contains(event.target)) {
         if(navItems.classList.contains("nav-expanded")) {
           navItems.classList.remove("nav-expanded");
@@ -56,14 +52,18 @@ function addClearClick() { // hides menu whenever user clicks out of menu on mob
 function slideSection() {
   menuSections = Array.from($all(".nav-menu-item-full"));
   menuSections.forEach((item) => {
-    item.addEventListener("click", () => showSection(item.id));
+    item.addEventListener("click", () => showSection(item));
   });
 }
 
+
 /* showing sections */ 
 let tempSection = ''; // opened section
-function showSection(section) { // section = item.id
-  let currentSection = $(`.${section}`); // clicked section
+let lastPressedSection = '';
+function showSection(section) {
+  let currentSection = $(`.${section.id}`); // clicked section
+  if(!lastPressedSection) { lastPressedSection = section; }
+  let sectionsArr = Array.from($(".nav-menu-item-full"));
   if(tempSection) {
     if(!isEqual(tempSection, currentSection)) {
       tempSection.setAttribute("hidden", "");
