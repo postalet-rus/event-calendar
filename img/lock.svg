@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E5E6F5;}
+	.st1{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st2{fill:#163759;}
+</style>
+<g>
+	<path class="st0" d="M50.5,70.5c-14.3,0-26-12.3-26-27.5c0-15.2,11.7-27.5,26-27.5c14.3,0,26,12.3,26,27.5
+		C76.5,58.2,64.8,70.5,50.5,70.5z M50.5,15.8C36.3,15.8,24.7,28,24.7,43s11.6,27.2,25.8,27.2C64.7,70.2,76.3,58,76.3,43
+		S64.7,15.8,50.5,15.8z"/>
+	<path class="st0" d="M50.5,14C35.3,14,23,27,23,43s12.3,29,27.5,29S78,59,78,43S65.7,14,50.5,14L50.5,14z M50.5,68.7
+		c-13.4,0-24.3-11.5-24.3-25.7s10.9-25.7,24.3-25.7S74.8,28.8,74.8,43S63.9,68.7,50.5,68.7L50.5,68.7z"/>
+</g>
+<path class="st1" d="M9.5,46.5"/>
+<g>
+	<rect x="23.5" y="43.5" class="st0" width="54" height="43"/>
+	<path class="st0" d="M77,44v42H24V44H77 M78,43H23v44h55V43L78,43z"/>
+</g>
+<g>
+	<circle class="st2" cx="50" cy="61" r="8"/>
+</g>
+<g>
+	<polygon class="st2" points="58,78 42,78 45.6,62 54.4,62 	"/>
+</g>
+</svg>
