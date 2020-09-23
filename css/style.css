@@ -111,11 +111,10 @@ body {
 }
 
 .calendar-wrapper {
+  position: relative;
   margin-left: 20px;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #e5e6f5;
 }
 
 .calendar-wrapper::-webkit-scrollbar {
@@ -124,8 +123,7 @@ body {
 
 .calendar-wrapper table {
   width: 100%;
-  height: auto;
-  background: #e5e6f5;
+  height: 60%;
   border-collapse: collapse;
 }
 
@@ -166,7 +164,7 @@ body {
 .event-sidewrapper {
   margin-right: 20px;
   width: 60%;
-  height: 90%;
+  height: 100%;
   background: #e5e6f5;
 }
 
@@ -194,10 +192,71 @@ td.today {
   color: red;
 }
 
+.control-container {
+  width: 100%;
+  height: 50px;
+  background: #163759;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control-container div img,
+.control-container .switchM-button {
+  width: 25px;
+  height: 25px;
+}
+
+.control-container div:hover img {
+  transform: scale(2);
+}
+
+.control-container .month-display {
+  color: #e5e6f5;
+  font-size: 20px;
+}
+
+.control-container .month-display:hover {
+  color: #a9ade0
+}
+
+.selecting-menu {
+  animation: popUp .3s ease-in-out normal;
+}
+
+.selecting-menu ul {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+  color: #e5e6f5;
+  background: #163759;
+  box-shadow: 3px 3px #0b1d2e;
+}
+
+.selecting-menu ul li {
+  padding: 10px;
+}
+
+.selecting-menu li:hover {
+  color: #a9ade0;
+  text-shadow: 1px 1px #a9ade0;
+}
+
 @keyframes underlineActive {
   from {
     left: 50%;
     right: 50%;
     width: 0
+  }
+}
+
+@keyframes popUp {
+  from {
+    opacity: 0;
   }
 }

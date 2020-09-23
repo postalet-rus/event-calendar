@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
   <script src="js/calendar.js" defer></script>
-  <title>Test</title>
+  <title>Планировщик мероприятий</title>
 </head>
 <body>
   <header class="header">
@@ -21,12 +21,47 @@
     <section class="section home-view" id="homeV">
       <div class="home-wrapper">
         <div class="logo-wrapper"><img class="logo" src="img/logo.svg" alt="logo"></div>
-        <h1>Calendar V5.0</h1>
-        <span>Development</span>
+        <h1>Планировщик мероприятий V5.0</h1>
+        <span>В разработке</span>
       </div>
     </section>
     <section id="calendarV" class="section calendar-view">
-      <div class="calendar-wrapper" id="_calMain"></div>
+      <div class="calendar-wrapper" id="_calMain">
+        <div id= "_selectMenu" class="selecting-menu" hidden>
+          <ul>
+            <li class="month-item">Январь</li>
+            <li class="month-item">Февраль</li>
+            <li class="month-item">Март</li>
+            <li class="month-item">Апрель</li>
+            <li class="month-item">Май</li>
+            <li class="month-item">Июнь</li>
+            <li class="month-item">Июль</li>
+            <li class="month-item">Август</li>
+            <li class="month-item">Сентябрь</li>
+            <li class="month-item">Октябрь</li>
+            <li class="month-item">Ноябрь</li>
+            <li class="month-item">Декабрь</li>
+          </ul>
+        </div>
+        <div class="control-container">
+          <div class="switchM-button left-control-button"><img src="img/arrow-left.svg"></div>
+          <span id="_monthDisplay" class="month-display"></span>
+          <div class="switchM-button right-control-button"><img src="img/arrow-right.svg"></div>
+        </div>
+        <table id="_calHead">
+          <thead>
+            <tr>
+              <th>ПН</th>
+              <th>ВТ</th>
+              <th>ЧТ</th>
+              <th>СР</th>
+              <th>ПТ</th>
+              <th>СБ</th>
+              <th>ВС</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
       <div class="event-sidewrapper">
         <div class="side-header">
           <span>События</span>
@@ -38,13 +73,13 @@
     <section id="eventsV" class="section events-view">
       <div class="home-wrapper">
         <div class="logo-wrapper"><img src="img/lock.svg" alt="" class="logo"></div>
-        <span>You must authorize to see the context</span>
+        <span>Вы должны быть авторизированы, чтобы видеть содержимое</span>
       </div>
     </section>
     <section id="settingsV" class="section settings-view">
       <div class="home-wrapper">
         <div class="logo-wrapper"><img src="img/lock.svg" alt="" class="logo"></div>
-        <span>You must authorize to see the context</span>
+        <span>Вы должны быть авторизированы, чтобы видеть содержимое</span>
       </div>
     </section>
   </main>
