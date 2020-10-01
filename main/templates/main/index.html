@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менеджер мероприятий</title>
+    {% if not request.user.is_authenticated %}
+      <link rel="stylesheet" href="{% static "main/css/style.css" %}">
+      <script src="{% static "main/js/auth.js" %}" defer></script>
+    {% elif request.user.is_authenticated %}
+      <link rel="stylesheet" href="{% static "index/css/style.css" %}">
+      <script src="{% static "index/js/main.js" %}" defer></script>
+      <script src="{% static "index/js/calendar.js" %}" defer></script>
+    {% endif %}
+</head>
+<body>
+  {% if not request.user.is_authenticated %}
+    <header class="header">
+      Авторизация
+    </header>
+    <div class="auth-form">
+      <div class="img-wrapper">
+        <img src="{% static "main/img/logo.svg" %}" alt="logo">
+      </div>
+      <div class="actions-wrapper">
+        <div class="action" id="_log">Вход</div>
+      </div>
+      <form class="login-form" action="">
+        <div class="input-wrapper">
+          <input type="text" placeholder="Логин" id="_log">
+        </div>
+        <div class="input-wrapper">
+          <input type="password" placeholder="Пароль" id="_pass">
+        </div>
+        <input type="button" value="Войти" id="_button">
+        {% csrf_token %}
+      </form>
+    </div>
+  {% elif request.user.is_authenticated %}
+    <header class="header">
+      <div class="nav-bar">
+        <div class="menu-section menu-section-current">Главная<span class="menu-underline"></span></div>
+        <div class="menu-section">Календарь<span class="menu-underline"></span></div>
+      </div>
+    </header>
+    <main class="main-section-wrapper">
+      <section class="section home-view" id="homeV">
+        <div class="home-wrapper">
+          <div class="logo-wrapper"><img class="logo" src="{% static "index/img/logo.svg" %}" alt="logo"></div>
+          <h1>Добро пожаловать, {{ request.user.username }}!</h1>
+          <a href="/logout">Выйти</a>
+        </div>
+      </section>
+      <section id="calendarV" class="section calendar-view">
+        <div class="calendar-wrapper" id="_calMain">
+          <div id="_selectMenu" class="selecting-menu" hidden>
+            <ul>
+              <li class="month-item">Январь</li>
+              <li class="month-item">Февраль</li>
+              <li class="month-item">Март</li>
+              <li class="month-item">Апрель</li>
+              <li class="month-item">Май</li>
+              <li class="month-item">Июнь</li>
+              <li class="month-item">Июль</li>
+              <li class="month-item">Август</li>
+              <li class="month-item">Сентябрь</li>
+              <li class="month-item">Октябрь</li>
+              <li class="month-item">Ноябрь</li>
+              <li class="month-item">Декабрь</li>
+            </ul>
+          </div>
+          <div class="control-container">
+            <div class="switchM-button left-control-button"><img src="{% static "index/img/arrow-left.svg" %}"></div>
+            <span id="_monthDisplay" class="month-display"></span>
+            <div class="switchM-button right-control-button"><img src="{% static "index/img/arrow-right.svg" %}"></div>
+          </div>
+          <table id="_calHead">
+            <thead>
+              <tr>
+                <th>ПН</th>
+                <th>ВТ</th>
+                <th>ЧТ</th>
+                <th>СР</th>
+                <th>ПТ</th>
+                <th>СБ</th>
+                <th>ВС</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="event-sidewrapper">
+          <div class="side-header">
+            <span>События</span>
+          </div>
+          <div class="event-sidewrapper-controls">
+            <a href="admmain/event/add/" class="block-button event-new">[+]</a>
+          </div>
+          <div class="side-body" id="_evContainer">
+          </div>
+        </div>
+      </section>
+    </main>
+  {% endif %}
+</body>
+</html>
