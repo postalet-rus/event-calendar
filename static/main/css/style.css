@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  height: 25px;
+  width: 100%;
+  background: #163759;
+}
